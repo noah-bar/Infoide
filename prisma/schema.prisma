@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Alert {
+  id          String   @id @default(cuid())
+  title       String?
+  body        String?   @db.Text
+  source      String?
+  externalId  String    @unique
+  category    String
+  importance  Int
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("alerts")
+}

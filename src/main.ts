@@ -5,33 +5,31 @@ import {TAlert} from "./types.js";
 import {AlertService} from "./services/AlertService.js";
 import {TweetGenerator} from "./llms/prompts/TweetGenerator.js";
 
-async function main() {
-    console.log("🚀 Starting alert ingestion process...")
 
-    const alerts = await newsApiMajorFeedFetcher.fetch()
-    console.log(`📥 Fetched ${alerts.length} alerts from NewsAPI.`)
+const alertClassifier = new AlertClassifier()
+const tweetGenerator = new TweetGenerator()
 
-    const alertClassifier = new AlertClassifier()
-    const tweetGenerator = new TweetGenerator()
+console.log("🚀 Starting alert ingestion process...")
 
-    for (const alert of alerts) {
-        const exists = await AlertService.exists(alert.externalId)
-        if (exists) continue
+const alerts = await newsApiMajorFeedFetcher.fetch()
+console.log(`📥 Fetched ${alerts.length} alerts from NewsAPI.`)
 
-        console.log(`🔎 Processing alert: "${alert.title}"`)
-        console.log("🧠 Classifying alert...")
-        const classification = await alertClassifier.classify(alert)
-        const classifiedAlert = {...alert, ...classification} as TAlert
+for (const alert of alerts) {
+    const exists = await AlertService.exists(alert.externalId)
+    if (exists) continue
 
-        console.log("🐦 Generating tweet...")
-        const tweet = await tweetGenerator.generate(classifiedAlert)
+    console.log(`🔎 Processing alert: "${alert.title}"`)
+    console.log("🧠 Classifying alert...")
+    const classification = await alertClassifier.classify(alert)
+    const classifiedAlert = {...alert, ...classification} as TAlert
 
-        await AlertService.create({...classifiedAlert, tweet})
-        console.log(`✅ New alert inserted: "${alert.title}" (${classification.category}, importance: ${classification.importance})`)
-        console.log(tweet + "\n")
-    }
+    console.log("🐦 Generating tweet...")
+    const tweet = await tweetGenerator.generate(classifiedAlert)
 
-    console.log("🎉 Ingestion process completed.")
+    await AlertService.create({...classifiedAlert, tweet})
+    console.log(`✅ New alert inserted: "${alert.title}" (${classification.category}, importance: ${classification.importance})`)
+    console.log(tweet + "\n")
 }
 
-main().then()
+console.log("🎉 Ingestion process completed.")
+

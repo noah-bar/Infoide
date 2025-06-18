@@ -1,6 +1,6 @@
 # Infoïde
 
-**Infoïde** is a lightweight Node.js application that fetches recent news alerts, classifies them using a local LLM (via [Ollama](https://ollama.com)), and stores them in a MySQL database.
+**Infoïde** is a lightweight Node.js application that fetches recent news alerts, classifies them using a local LLM (via [Ollama](https://ollama.com)), generates tweet-sized summaries, and stores everything in a MySQL database.
 
 ## Features
 
@@ -8,6 +8,7 @@
 - 🧠 Automatically classifies each alert using a local LLM (e.g. `phi3:mini`)
 - 🗂 Categorizes news with a consistent set of tags
 - 📊 Assigns an importance score to each alert (from 1 to 5)
+- 🐦 Generates a tweet-style summary in French, with emoji and source
 - 💾 Avoids duplicates based on a hashed external ID
 - 🧼 Handles LLM response errors and sanitizes JSON output
 

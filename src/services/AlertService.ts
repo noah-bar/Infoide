@@ -23,6 +23,7 @@ export class AlertService {
                 source: alert.source,
                 externalId: alert.externalId,
                 category: alert.category,
+                tweet: alert.tweet,
                 importance: alert.importance,
                 publishedAt: alert.publishedAt,
             }

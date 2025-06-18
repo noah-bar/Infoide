@@ -16,6 +16,7 @@ model Alert {
   externalId  String    @unique
   category    String
   importance  Int
+  tweet       String    @db.Text
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt

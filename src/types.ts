@@ -11,4 +11,4 @@ export type TClassification = {
     importance: number;
 };
 
-export type TAlert = TAlertInput & TClassification
+export type TAlert = TAlertInput & TClassification & { tweet: string }

@@ -5,7 +5,7 @@
 ## Features
 
 - 🔎 Fetches real-time news from NewsAPI
-- 🧠 Automatically classifies each alert using a local LLM (e.g. `phi3:mini`)
+- 🧠 Automatically classifies each alert using a local LLM (e.g. `mistral`)
 - 🗂 Categorizes news with a consistent set of tags
 - 📊 Assigns an importance score to each alert (from 1 to 5)
 - 🐦 Generates a tweet-style summary in French, with emoji and source

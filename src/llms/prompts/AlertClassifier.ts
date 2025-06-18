@@ -40,7 +40,7 @@ export class AlertClassifier extends OllamaLLM {
             - Return a single valid JSON object only.
         `.trim()
 
-        super(context, "phi3:mini");
+        super(context, "mistral");
     }
 
     private validateResult(result: unknown): result is {

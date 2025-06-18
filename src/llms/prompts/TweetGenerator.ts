@@ -59,7 +59,7 @@ export class TweetGenerator extends OllamaLLM {
         `.trim();
 
 
-        super(context, "phi3:mini");
+        super(context, "mistral");
     }
 
     public async generate(alert: TAlert): Promise<string> {
